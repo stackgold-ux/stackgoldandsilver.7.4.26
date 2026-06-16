@@ -3,9 +3,9 @@ import { TrendingUp, TrendingDown } from 'lucide-react';
 
 const SpotTicker = () => {
   const [prices, setPrices] = useState({
-    gold: 2350.45,
-    silver: 29.12,
-    platinum: 980.20
+    gold: 4344.36,
+    silver: 70.25,
+    platinum: 1811.00
   });
 
   const [lastPrices, setLastPrices] = useState(prices);
