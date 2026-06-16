@@ -12,7 +12,7 @@ const EducationalHub = () => {
   return (
     <section className="py-20 bg-surface/10 border-t border-border">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-4xl font-black uppercase tracking-tighter italic mb-12 text-center">Educational Hub</h2>
+        <h2 className="text-4xl font-black uppercase tracking-tighter italic mb-12 text-center">Your Stack School</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {articles.map((article, i) => (

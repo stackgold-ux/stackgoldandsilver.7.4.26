@@ -3,18 +3,29 @@ import { Check, Calendar, TrendingUp, Shield } from 'lucide-react';
 
 const StackingClub = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const [selections, setSelections] = useState({
+    silver: 'Silver',
+    gold: 'Gold',
+    platinum: 'Mix'
+  });
 
   const plans = [
-    { id: 'apprentice', name: 'Apprentice', amount: 100, perks: ['1/10 oz Silver monthly', 'Educational newsletter', 'Market updates'] },
-    { id: 'guardian', name: 'Guardian', amount: 250, perks: ['1/4 oz Silver + 1g Gold', 'Exclusive webinars', 'Early access to drops'] },
-    { id: 'patriarch', name: 'Patriarch/Matriarch', amount: 500, perks: ['1/2 oz Silver + 2.5g Gold', 'Custom engraving included', 'Private consulting'] },
+    { id: 'silver', name: 'Silver Tier', amount: 24.99, perks: ['Pure Silver monthly', 'Educational newsletter', 'Stack Squad access'] },
+    { id: 'gold', name: 'Gold Tier', amount: 49.99, perks: ['Gold & Silver mix', 'Exclusive webinars', 'Early access to drops'] },
+    { id: 'platinum', name: 'Platinum Tier', amount: 99.99, perks: ['Premium selection', 'Custom engraving included', 'Private consulting'] },
   ];
+
+  const metalOptions = ['Silver', 'Gold', 'Mix', 'Surprise Me'];
+
+  const handleSelection = (planId, option) => {
+    setSelections({ ...selections, [planId]: option });
+  };
 
   return (
     <section className="py-20 bg-surface/30 border-y border-border">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-black uppercase italic text-accent mb-4">Monthly Stacking Club</h2>
+          <h2 className="text-4xl font-black uppercase italic text-accent mb-4">Stack Squad</h2>
           <p className="text-text-muted max-w-2xl mx-auto">
             Shift from fragile fiat to tangible wealth with disciplined, hands-off accumulation.
             Join the elite circle of generational wealth builders.
@@ -34,7 +45,7 @@ const StackingClub = () => {
             >
               {selectedPlan === plan.id && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-background text-xs font-bold px-4 py-1 rounded-full uppercase">
-                  Selected
+                  Active
                 </div>
               )}
               
@@ -44,6 +55,28 @@ const StackingClub = () => {
                 <span className="text-text-muted">/month</span>
               </div>
               
+              <div className="mb-8">
+                <label className="block text-xs font-bold uppercase tracking-widest mb-3 text-text-muted text-center">Select Your Metal</label>
+                <div className="grid grid-cols-2 gap-2">
+                  {metalOptions.map((option) => (
+                    <button
+                      key={option}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleSelection(plan.id, option);
+                      }}
+                      className={`py-2 px-1 text-[10px] font-bold uppercase rounded border transition-all ${
+                        selections[plan.id] === option 
+                          ? 'border-primary bg-primary text-background' 
+                          : 'border-border bg-background/50 text-text-muted hover:border-primary/50'
+                      }`}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <ul className="space-y-4 mb-8 flex-grow">
                 {plan.perks.map((perk, i) => (
                   <li key={i} className="flex items-start text-sm text-text-muted">
@@ -58,7 +91,7 @@ const StackingClub = () => {
                   ? 'bg-primary text-background' 
                   : 'bg-white/5 text-white hover:bg-white/10'
               }`}>
-                Join the Club
+                Join the Squad
               </button>
             </div>
           ))}

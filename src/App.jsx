@@ -7,6 +7,8 @@ import SwagShop from './components/SwagShop';
 import EducationalHub from './components/EducationalHub';
 import CheckoutFlow from './components/CheckoutFlow';
 import { ShoppingCart, Menu, X, ChevronRight, Shield, Award, Zap } from 'lucide-react';
+import LogoGold from './assets/logo-gold.jpg';
+import LogoSilver from './assets/logo-silver.jpg';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -32,7 +34,6 @@ function App() {
 
   const addToCart = (product) => {
     setCart([...cart, product]);
-    // Optional: show some feedback
   };
 
   return (
@@ -41,18 +42,24 @@ function App() {
       
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 metallic-gold rounded flex items-center justify-center font-black text-background">SYG</div>
-            <span className="text-2xl font-black uppercase italic tracking-tighter">Stack Your Gold</span>
+        <div className="max-w-7xl mx-auto px-4 h-24 flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="relative flex items-center">
+              <img src={LogoGold} alt="SYG Gold Logo" className="w-12 h-12 object-contain" />
+              <img src={LogoSilver} alt="SYS Silver Logo" className="w-10 h-10 object-contain -ml-4 mt-4 border-2 border-background rounded-full" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xl font-black uppercase italic tracking-tighter leading-none">Stack Your Gold</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">Solidify Your Legacy</span>
+            </div>
           </div>
 
-          <div className="hidden md:flex items-center space-x-8 font-bold text-sm uppercase tracking-widest">
+          <div className="hidden lg:flex items-center space-x-8 font-bold text-sm uppercase tracking-widest">
             <a href="#shop" className="hover:text-primary transition-colors">Bullion</a>
-            <a href="#club" className="hover:text-primary transition-colors">Stacking Club</a>
+            <a href="#club" className="hover:text-primary transition-colors text-accent">Stack Squad</a>
             <a href="#legacy" className="hover:text-primary transition-colors">Legacy</a>
             <a href="#swag" className="hover:text-primary transition-colors">Swag</a>
-            <a href="#education" className="hover:text-primary transition-colors">Education</a>
+            <a href="#education" className="hover:text-primary transition-colors">Stack School</a>
           </div>
 
           <div className="flex items-center space-x-4">
@@ -68,7 +75,7 @@ function App() {
               )}
             </button>
             <button 
-              className="md:hidden"
+              className="lg:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X /> : <Menu />}
@@ -79,13 +86,13 @@ function App() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-background pt-20 p-6 md:hidden">
+        <div className="fixed inset-0 z-40 bg-background pt-24 p-6 lg:hidden">
           <div className="flex flex-col space-y-6 text-2xl font-black uppercase italic">
             <a href="#shop" onClick={() => setIsMenuOpen(false)}>Bullion</a>
-            <a href="#club" onClick={() => setIsMenuOpen(false)}>Stacking Club</a>
+            <a href="#club" onClick={() => setIsMenuOpen(false)}>Stack Squad</a>
             <a href="#legacy" onClick={() => setIsMenuOpen(false)}>Legacy</a>
             <a href="#swag" onClick={() => setIsMenuOpen(false)}>Swag</a>
-            <a href="#education" onClick={() => setIsMenuOpen(false)}>Education</a>
+            <a href="#education" onClick={() => setIsMenuOpen(false)}>Stack School</a>
           </div>
         </div>
       )}
@@ -108,30 +115,34 @@ function App() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative py-32 px-4 overflow-hidden">
-          <div className="max-w-7xl mx-auto relative z-10">
-            <div className="max-w-3xl">
-              <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-8">
-                Build a <span className="text-primary italic">Legacy</span> Beyond Fiat.
+        <section className="relative py-24 md:py-32 px-4 overflow-hidden">
+          <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
+            <div className="max-w-2xl text-center md:text-left">
+              <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-8">
+                The World is <span className="text-primary italic">Fragile</span>. Your Wealth Shouldn't Be.
               </h1>
-              <p className="text-xl text-text-muted mb-12 max-w-2xl">
-                Shift your family's wealth into tangible, generational gold and silver. 
-                Transparent pricing, automated stacking, and custom legacy pieces.
+              <p className="text-xl text-text-muted mb-12 max-w-xl mx-auto md:mx-0">
+                Shift your family's labor into tangible, generational gold and silver. 
+                Transparent pricing, the **Stack Squad** automated accumulation, and custom legacy pieces.
               </p>
-              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
+              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center md:justify-start">
                 <a href="#shop" className="bg-primary text-background px-10 py-5 rounded-xl font-black uppercase tracking-widest flex items-center justify-center group hover:scale-105 transition-all">
                   Start Stacking <ChevronRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a href="#club" className="border border-border bg-surface/50 backdrop-blur px-10 py-5 rounded-xl font-black uppercase tracking-widest flex items-center justify-center hover:bg-surface transition-all">
-                  Join the Club
+                  Join the Squad
                 </a>
               </div>
+            </div>
+            
+            <div className="relative w-full max-w-md hidden md:block">
+              <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full"></div>
+              <img src={LogoGold} alt="SYG Premium Gold" className="w-full h-auto object-contain relative z-10 drop-shadow-[0_0_30px_rgba(212,175,55,0.4)] animate-pulse" />
             </div>
           </div>
           
           {/* Background decoration */}
           <div className="absolute top-1/2 right-0 -translate-y-1/2 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent blur-3xl rounded-full"></div>
-          <div className="absolute top-1/4 -right-20 w-96 h-96 metallic-gold rounded-full blur-[120px] opacity-20"></div>
         </section>
 
         {/* Value Props */}
@@ -173,15 +184,17 @@ function App() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
             <div className="col-span-1 md:col-span-2">
-              <div className="flex items-center space-x-2 mb-6">
-                <div className="w-8 h-8 metallic-gold rounded flex items-center justify-center font-black text-background text-sm">SYG</div>
-                <span className="text-xl font-black uppercase italic tracking-tighter">Stack Your Gold</span>
+              <div className="flex items-center space-x-4 mb-6">
+                <img src={LogoGold} alt="SYG Logo" className="w-12 h-12" />
+                <div className="flex flex-col">
+                  <span className="text-xl font-black uppercase italic tracking-tighter">Stack Your Gold</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-primary">The New Standard</span>
+                </div>
               </div>
               <p className="text-text-muted max-w-sm mb-8">
-                Providing families with the tools and resources to transition from fragile fiat dependency to tangible, generational wealth.
+                Providing families with the tools and resources to transition from fragile fiat dependency to tangible, generational wealth via **Stack Squad** and **Your Stack School**.
               </p>
               <div className="flex space-x-4">
-                {/* Social placeholders */}
                 <div className="w-10 h-10 bg-background border border-border rounded-full flex items-center justify-center hover:border-primary cursor-pointer transition-colors">X</div>
                 <div className="w-10 h-10 bg-background border border-border rounded-full flex items-center justify-center hover:border-primary cursor-pointer transition-colors">IG</div>
                 <div className="w-10 h-10 bg-background border border-border rounded-full flex items-center justify-center hover:border-primary cursor-pointer transition-colors">YT</div>
@@ -199,15 +212,18 @@ function App() {
             <div>
               <h5 className="font-bold uppercase tracking-widest mb-6">Resources</h5>
               <ul className="space-y-4 text-text-muted text-sm">
+                <li><a href="#education" className="hover:text-white transition-colors">Your Stack School</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Price Charts</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Shipping Info</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">FAQs</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Storage Solutions</a></li>
               </ul>
             </div>
           </div>
           <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center text-xs text-text-muted uppercase tracking-widest">
-            <p>© 2026 Stack Your Gold. All rights reserved.</p>
+            <div className="flex items-center space-x-4">
+              <img src={LogoSilver} alt="SYS Logo" className="w-8 h-8 opacity-50 grayscale hover:grayscale-0 transition-all cursor-crosshair" />
+              <p>© 2026 Stack Your Gold. All rights reserved.</p>
+            </div>
             <p className="mt-4 md:mt-0 italic">Secure Your Future, One Ounce at a Time.</p>
           </div>
         </div>
