@@ -22,7 +22,8 @@ function App() {
   const [spotPrices, setSpotPrices] = useState({
     gold: 4344.36,
     silver: 70.25,
-    platinum: 1811.00
+    platinum: 1811.00,
+    copper: 0.25
   });
 
   // Seed data logic
@@ -100,7 +101,8 @@ function App() {
       setSpotPrices(prev => ({
         gold: prev.gold + (Math.random() - 0.5) * 1,
         silver: prev.silver + (Math.random() - 0.5) * 0.05,
-        platinum: prev.platinum + (Math.random() - 0.5) * 0.5
+        platinum: prev.platinum + (Math.random() - 0.5) * 0.5,
+        copper: Math.max(0.05, prev.copper + (Math.random() - 0.5) * 0.005)
       }));
     }, 10000);
     return () => clearInterval(interval);

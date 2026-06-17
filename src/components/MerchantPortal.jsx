@@ -35,7 +35,7 @@ const MerchantPortal = () => {
     setShowExport(true);
   };
 
-  const totalSales = orders.reduce((sum, order) => sum + order.totalAmount, 0);
+  const totalSales = orders.reduce((sum, order) => sum + (parseFloat(order.totalAmount) || 0), 0);
   const activeSubscribers = orders.filter(order => order.isSubscription).length;
 
   return (
@@ -133,7 +133,7 @@ const MerchantPortal = () => {
                         </div>
                       </td>
                       <td className="px-8 py-6 text-right">
-                        <div className="font-black text-primary font-mono">${order.totalAmount.toFixed(2)}</div>
+                        <div className="font-black text-primary font-mono">${(parseFloat(order.totalAmount) || 0).toFixed(2)}</div>
                       </td>
                     </tr>
                   ))}

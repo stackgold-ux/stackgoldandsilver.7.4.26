@@ -18,7 +18,7 @@ const CheckoutFlow = ({ cart, onComplete, onCancel }) => {
     password: ''
   });
 
-  const subtotal = cart.reduce((sum, item) => sum + parseFloat(item.price), 0);
+  const subtotal = cart.reduce((sum, item) => sum + (parseFloat(item.price) || 0), 0);
   const shipping = subtotal > 500 ? 0 : 20;
   const total = subtotal + shipping;
 
@@ -28,6 +28,10 @@ const CheckoutFlow = ({ cart, onComplete, onCancel }) => {
 
   const nextStep = () => {
     if (step === 1) {
+      if (!formData.name || !formData.email || !formData.phone || !formData.address || !formData.city || !formData.zip) {
+        alert('Please fill out all shipping details, including your Phone Number.');
+        return;
+      }
       if (formData.createAccount && (!formData.username || !formData.password)) {
         alert('Please provide a username and password to create your account.');
         return;
@@ -43,8 +47,12 @@ const CheckoutFlow = ({ cart, onComplete, onCancel }) => {
         customerEmail: formData.email,
         customerPhone: formData.phone,
         shippingAddress: `${formData.address}, ${formData.city}, ${formData.zip}`,
-        items: cart.map(item => ({ name: item.name, price: item.price, type: item.type })),
-        totalAmount: total,
+        items: cart.map(item => ({ 
+          name: item.name, 
+          price: Number((parseFloat(item.price) || 0).toFixed(2)), 
+          type: item.type 
+        })),
+        totalAmount: Number(total.toFixed(2)),
         isSubscription: cart.some(item => item.type === 'subscription'),
         date: new Date().toISOString()
       };
@@ -136,12 +144,12 @@ const CheckoutFlow = ({ cart, onComplete, onCancel }) => {
               <Truck className="mr-2 text-primary" /> Shipping Details
             </h3>
             <div className="grid grid-cols-2 gap-4">
-              <input name="name" placeholder="Full Name" onChange={handleInputChange} className="bg-background border border-border p-4 rounded-xl outline-none focus:border-primary col-span-2" />
-              <input name="email" placeholder="Email Address" onChange={handleInputChange} className="bg-background border border-border p-4 rounded-xl outline-none focus:border-primary col-span-2" />
-              <input name="phone" placeholder="Phone Number" onChange={handleInputChange} className="bg-background border border-border p-4 rounded-xl outline-none focus:border-primary col-span-2" />
-              <input name="address" placeholder="Shipping Address" onChange={handleInputChange} className="bg-background border border-border p-4 rounded-xl outline-none focus:border-primary col-span-2" />
-              <input name="city" placeholder="City" onChange={handleInputChange} className="bg-background border border-border p-4 rounded-xl outline-none focus:border-primary" />
-              <input name="zip" placeholder="Zip Code" onChange={handleInputChange} className="bg-background border border-border p-4 rounded-xl outline-none focus:border-primary" />
+              <input name="name" placeholder="Full Name" onChange={handleInputChange} value={formData.name} className="bg-background border border-border p-4 rounded-xl outline-none focus:border-primary col-span-2 text-white" />
+              <input name="email" placeholder="Email Address" onChange={handleInputChange} value={formData.email} className="bg-background border border-border p-4 rounded-xl outline-none focus:border-primary col-span-2 text-white" />
+              <input name="phone" placeholder="Phone Number" onChange={handleInputChange} value={formData.phone} className="bg-background border border-border p-4 rounded-xl outline-none focus:border-primary col-span-2 text-white" />
+              <input name="address" placeholder="Shipping Address" onChange={handleInputChange} value={formData.address} className="bg-background border border-border p-4 rounded-xl outline-none focus:border-primary col-span-2 text-white" />
+              <input name="city" placeholder="City" onChange={handleInputChange} value={formData.city} className="bg-background border border-border p-4 rounded-xl outline-none focus:border-primary text-white" />
+              <input name="zip" placeholder="Zip Code" onChange={handleInputChange} value={formData.zip} className="bg-background border border-border p-4 rounded-xl outline-none focus:border-primary text-white" />
             </div>
 
             <div className="mt-8 pt-8 border-t border-border">
@@ -172,7 +180,8 @@ const CheckoutFlow = ({ cart, onComplete, onCancel }) => {
                       name="username" 
                       placeholder="e.g. GoldStacker" 
                       onChange={handleInputChange} 
-                      className="w-full bg-background border border-border p-4 rounded-xl outline-none focus:border-primary font-bold" 
+                      value={formData.username}
+                      className="w-full bg-background border border-border p-4 rounded-xl outline-none focus:border-primary font-bold text-white" 
                     />
                   </div>
                   <div className="col-span-2 md:col-span-1">
@@ -182,7 +191,8 @@ const CheckoutFlow = ({ cart, onComplete, onCancel }) => {
                       type="password" 
                       placeholder="••••••••" 
                       onChange={handleInputChange} 
-                      className="w-full bg-background border border-border p-4 rounded-xl outline-none focus:border-primary font-bold" 
+                      value={formData.password}
+                      className="w-full bg-background border border-border p-4 rounded-xl outline-none focus:border-primary font-bold text-white" 
                     />
                   </div>
                 </div>
@@ -197,9 +207,9 @@ const CheckoutFlow = ({ cart, onComplete, onCancel }) => {
               <CreditCard className="mr-2 text-primary" /> Payment Method
             </h3>
             <div className="grid grid-cols-4 gap-4">
-              <input name="cardNumber" placeholder="Card Number" onChange={handleInputChange} className="bg-background border border-border p-4 rounded-xl outline-none focus:border-primary col-span-4" />
-              <input name="expiry" placeholder="MM/YY" onChange={handleInputChange} className="bg-background border border-border p-4 rounded-xl outline-none focus:border-primary col-span-2" />
-              <input name="cvc" placeholder="CVC" onChange={handleInputChange} className="bg-background border border-border p-4 rounded-xl outline-none focus:border-primary col-span-2" />
+              <input name="cardNumber" placeholder="Card Number" onChange={handleInputChange} value={formData.cardNumber} className="bg-background border border-border p-4 rounded-xl outline-none focus:border-primary col-span-4 text-white font-mono" />
+              <input name="expiry" placeholder="MM/YY" onChange={handleInputChange} value={formData.expiry} className="bg-background border border-border p-4 rounded-xl outline-none focus:border-primary col-span-2 text-white font-mono" />
+              <input name="cvc" placeholder="CVC" onChange={handleInputChange} value={formData.cvc} className="bg-background border border-border p-4 rounded-xl outline-none focus:border-primary col-span-2 text-white font-mono" />
             </div>
           </div>
         )}
@@ -210,21 +220,21 @@ const CheckoutFlow = ({ cart, onComplete, onCancel }) => {
             <div className="space-y-2">
               {cart.map((item, i) => (
                 <div key={i} className="flex justify-between text-sm py-2 border-b border-border last:border-0">
-                  <span>{item.name}</span>
-                  <span className="font-mono">${item.price}</span>
+                  <span>{item.name} {item.weight && `(${item.weight})`}</span>
+                  <span className="font-mono text-primary font-bold">${(parseFloat(item.price) || 0).toFixed(2)}</span>
                 </div>
               ))}
               <div className="flex justify-between text-sm py-2 border-b border-border">
                 <span>Subtotal</span>
-                <span className="font-mono">${subtotal.toFixed(2)}</span>
+                <span className="font-mono text-white font-bold">${subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-sm py-2 border-b border-border">
-                <span>Shipping</span>
-                <span className="font-mono">{shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}</span>
+                <span>{shipping === 0 ? 'Shipping' : 'Insured Shipping (With Stacker Bonuses)'}</span>
+                <span className="font-mono text-white font-bold">{shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}</span>
               </div>
               <div className="flex justify-between text-xl font-bold pt-4">
                 <span>Total</span>
-                <span className="text-primary font-mono">${total.toFixed(2)}</span>
+                <span className="text-primary font-mono font-black">${total.toFixed(2)}</span>
               </div>
             </div>
           </div>
