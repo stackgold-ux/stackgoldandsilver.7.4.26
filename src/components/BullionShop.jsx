@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ShoppingCart, ShieldCheck, ChevronDown, ChevronUp, DollarSign, Info } from 'lucide-react';
 
 const BullionShop = ({ spotPrices, addToCart }) => {
@@ -50,16 +50,17 @@ const BullionShop = ({ spotPrices, addToCart }) => {
     const amount = amounts[metal];
     if (amount < 25 || amount > 9999 || isNaN(amount)) return;
 
+    // Weight calculation happens in background as requested
     const weightLabel = calculateWeight(metal, amount);
 
     const product = {
-      id: `${metal}-custom-${amount}-${Date.now()}`,
-      name: `${metal.charAt(0).toUpperCase() + metal.slice(1)} custom stacking`,
+      id: `${metal}-solo-${amount}-${Date.now()}`,
+      name: `${metal.charAt(0).toUpperCase() + metal.slice(1)} Solo Stack`,
       type: metal,
       weight: weightLabel,
       image: images[metal],
       price: amount.toFixed(2),
-      description: `Custom physical ${metal} bullion allocation. Direct-to-vault dynamic physical weight conversion.`
+      description: `One-time physical ${metal} bullion purchase. Direct-to-vault allocation.`
     };
 
     addToCart(product);
@@ -88,10 +89,10 @@ const BullionShop = ({ spotPrices, addToCart }) => {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
         <div>
-          <h2 className="text-4xl font-black uppercase tracking-tighter text-primary italic">Custom Stacking Shop</h2>
-          <p className="text-text-muted mt-2">Pick your metal, set your budget ($25 to $9,999), and we calculate your physical weight at exactly 15% over live spot.</p>
+          <h2 className="text-4xl font-black uppercase tracking-tighter text-primary italic">Solo Stack - One Time Purchases</h2>
+          <p className="text-text-muted mt-2">Pick your metal and set your budget ($25 to $9,999) for a one-time bullion acquisition.</p>
           <p className="text-xs text-text-muted mt-3 italic text-primary/80">
-            * All orders will be packaged as close to spot price as possible at time of order. We utilize metal grain to fill orders in or to supply micro orders unless otherwise specified.
+            * All orders are fulfilled with physical assets and secured in our vaulted network.
           </p>
         </div>
         <div className="flex items-center text-accent text-sm font-bold bg-accent/10 px-4 py-2 rounded border border-accent/20">
@@ -106,7 +107,6 @@ const BullionShop = ({ spotPrices, addToCart }) => {
           const currentAmount = amounts[metal];
           const inputVal = customInputs[metal];
           const isValid = currentAmount >= 25 && currentAmount <= 9999;
-          const displayWeight = isValid ? calculateWeight(metal, currentAmount) : '0.0000 oz';
 
           return (
             <div key={metal} className="group bg-surface border border-border rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-300 flex flex-col shadow-xl">
@@ -117,21 +117,15 @@ const BullionShop = ({ spotPrices, addToCart }) => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
-                <div className="absolute bottom-4 left-6">
-                  <span className="text-xs font-bold text-primary uppercase tracking-widest block mb-1">Spot Price</span>
-                  <span className="text-xl font-mono font-bold text-white">
-                    ${(spotPrices[metal] || 0.25).toFixed(2)}/oz
-                  </span>
-                </div>
               </div>
 
               <div className="p-6 flex-grow flex flex-col justify-between">
                 <div>
                   <h3 className="text-2xl font-black uppercase tracking-tight text-white mb-2 italic">
-                    {metal === 'gold' ? '🏆 Gold Stacker' : metal === 'silver' ? '🥈 Silver Stacker' : '🥉 Copper Stacker'}
+                    {metal === 'gold' ? '🏆 Gold Solo Stack' : metal === 'silver' ? '🥈 Silver Solo Stack' : '🥉 Copper Solo Stack'}
                   </h3>
                   <p className="text-text-muted text-sm mb-6">
-                    Customize your budget. We fulfill using premium physical {metal} coins, bars, and rounds.
+                    Fulfilling using premium physical {metal} coins, bars, and rounds.
                   </p>
 
                   {/* Standard Presets */}
@@ -198,19 +192,7 @@ const BullionShop = ({ spotPrices, addToCart }) => {
                   </div>
                 </div>
 
-                {/* Final Yield display */}
                 <div className="mt-auto border-t border-border pt-6">
-                  <div className="flex justify-between items-center bg-background/50 p-4 rounded-xl border border-border/50 mb-4">
-                    <div>
-                      <span className="text-xs text-text-muted block uppercase tracking-widest font-bold">Physical Yield</span>
-                      <span className="text-2xl font-mono font-black text-primary">{displayWeight}</span>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-xs text-text-muted block uppercase tracking-widest font-bold">Markup</span>
-                      <span className="text-sm font-bold text-accent font-mono">+15% Spot</span>
-                    </div>
-                  </div>
-
                   <button 
                     onClick={() => handleAddToCart(metal)}
                     disabled={!isValid}
@@ -221,7 +203,7 @@ const BullionShop = ({ spotPrices, addToCart }) => {
                     }`}
                   >
                     <ShoppingCart size={18} className="mr-2" />
-                    Stack {metal} • ${(isValid ? currentAmount : 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                    Solo Stack {metal} • ${(isValid ? currentAmount : 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
                   </button>
                 </div>
               </div>
@@ -234,7 +216,7 @@ const BullionShop = ({ spotPrices, addToCart }) => {
       <div className="bg-surface border border-border rounded-2xl p-6 md:p-8">
         <h3 className="text-2xl font-black uppercase tracking-tight text-white mb-6 italic border-b border-border pb-4 flex items-center">
           <Info size={22} className="mr-2 text-primary" />
-          Rounds, Bars and Coins
+          Physical Bullion Assets
         </h3>
         
         <div className="space-y-4">

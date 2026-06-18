@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Check, ArrowRight, Sliders, DollarSign } from 'lucide-react';
 import LogoGold from '../assets/logo-gold.jpg';
 import LogoSilver from '../assets/logo-silver.jpg';
 
-const StackingClub = ({ spotPrices, addToCart }) => {
+const StackingClub = ({ addToCart }) => {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [selections, setSelections] = useState({
     silver: 'Silver',

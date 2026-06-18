@@ -1,26 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { TrendingUp, ArrowDownRight, ShieldCheck } from 'lucide-react';
+import { useState } from 'react';
+import { TrendingUp, ShieldCheck } from 'lucide-react';
 
 const StackingCalculator = ({ spotPrices }) => {
   const [monthlyAmount, setMonthlyAmount] = useState(49.99);
   const [metal, setMetal] = useState('silver');
-  const [results, setResults] = useState({ 1: 0, 5: 0, 10: 0 });
 
   const tiers = [24.99, 49.99, 99.99];
   
-  useEffect(() => {
-    let price;
-    if (metal === 'gold') price = spotPrices.gold;
-    else if (metal === 'silver') price = spotPrices.silver;
-    else price = (spotPrices.gold + spotPrices.silver) / 2; // Mix/Surprise average
+  let price;
+  if (metal === 'gold') price = spotPrices.gold;
+  else if (metal === 'silver') price = spotPrices.silver;
+  else price = (spotPrices.gold + spotPrices.silver) / 2; // Mix/Surprise average
 
-    const yearly = (monthlyAmount * 12) / price;
-    setResults({
-      1: yearly.toFixed(2),
-      5: (yearly * 5).toFixed(2),
-      10: (yearly * 10).toFixed(2)
-    });
-  }, [monthlyAmount, metal, spotPrices]);
+  const yearly = (monthlyAmount * 12) / price;
+  const results = {
+    1: yearly.toFixed(2),
+    5: (yearly * 5).toFixed(2),
+    10: (yearly * 10).toFixed(2)
+  };
 
   return (
     <div className="bg-surface border border-border p-8 rounded-3xl shadow-2xl relative overflow-hidden">

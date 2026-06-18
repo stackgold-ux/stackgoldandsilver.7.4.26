@@ -28,6 +28,10 @@ body {
   background: linear-gradient(135deg, #d4af37 0%, #f9e29c 50%, #b8860b 100%);
 }
 
+.metallic-silver {
+  background: linear-gradient(135deg, #c0c0c0 0%, #e5e5e5 50%, #a9a9a9 100%);
+}
+
 .metallic-bronze {
   background: linear-gradient(135deg, #cd7f32 0%, #efa55d 50%, #8b4513 100%);
 }

@@ -1,5 +1,5 @@
 {/* SYG Web App - Bundled Updates */}
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import SpotTicker from './components/SpotTicker';
 import BullionShop from './components/BullionShop';
 import StackingClub from './components/StackingClub';
@@ -110,6 +110,7 @@ function App() {
 
   const addToCart = (product) => {
     setCart([...cart, product]);
+    setIsCheckoutOpen(true);
   };
 
   return (
@@ -298,10 +299,10 @@ function App() {
           </div>
         </section>
 
-        <div id="shop"><BullionShop spotPrices={spotPrices} addToCart={addToCart} /></div>
         <div id="club"><StackingClub spotPrices={spotPrices} addToCart={addToCart} /></div>
-        <div id="legacy"><LegacyEngraver /></div>
-        <div id="swag"><SwagShop /></div>
+        <div id="shop"><BullionShop spotPrices={spotPrices} addToCart={addToCart} /></div>
+        <div id="legacy"><LegacyEngraver spotPrices={spotPrices} addToCart={addToCart} /></div>
+        <div id="swag"><SwagShop addToCart={addToCart} /></div>
         <div id="education"><EducationalHub /></div>
         <AboutUs />
 

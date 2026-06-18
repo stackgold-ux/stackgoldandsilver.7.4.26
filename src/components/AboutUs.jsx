@@ -1,4 +1,3 @@
-import React from 'react';
 import { Shield, Target, Users } from 'lucide-react';
 
 const AboutUs = () => {

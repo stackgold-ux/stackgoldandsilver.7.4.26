@@ -1,4 +1,3 @@
-import React from 'react';
 import { BookOpen, Users, Key, Landmark } from 'lucide-react';
 
 const EducationalHub = () => {
