@@ -332,58 +332,6 @@ function App() {
           </div>
         </section>
 
-        {/* === FIAT PAIN: THE RECEIPT WALL === */}
-        <section id="receipt" className="py-24 bg-background/95 px-4 border-t border-border">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <span className="text-xs font-black uppercase tracking-[0.3em] text-red-400 mb-4 block">📉 INFLATION IS A THIEF</span>
-              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter italic leading-none">The Receipt</h2>
-              <p className="text-lg md:text-xl text-text-secondary mt-6 max-w-2xl mx-auto">What fiat currency has cost your family since 1970.</p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <div className="bg-background border border-border rounded-2xl p-8">
-                <h3 className="text-2xl font-black uppercase tracking-tighter italic mb-6 text-red-400">$100 in 1970</h3>
-                <ul className="space-y-4">
-                  <li className="flex items-start space-x-3">
-                    <span className="text-green-400 font-bold text-xl">🛒</span>
-                    <span className="font-bold">A full week of groceries for a family of 4</span>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <span className="text-green-400 font-bold text-xl">⛽</span>
-                    <span className="font-bold">36 gallons of gas</span>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <span className="text-green-400 font-bold text-xl">🏠</span>
-                    <span className="font-bold">1/230th of a brand-new home</span>
-                  </li>
-                </ul>
-              </div>
-              <div className="bg-background border border-red-500/20 rounded-2xl p-8 relative overflow-hidden">
-                <div className="absolute inset-0 bg-red-500/5"></div>
-                <h3 className="text-2xl font-black uppercase tracking-tighter italic mb-6 text-red-400 relative z-10">$100 TODAY</h3>
-                <ul className="space-y-4 relative z-10">
-                  <li className="flex items-start space-x-3">
-                    <span className="text-red-400 font-bold text-xl">🥩</span>
-                    <span className="font-bold opacity-70">A single meal for 2 people</span>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <span className="text-red-400 font-bold text-xl">⛽</span>
-                    <span className="font-bold opacity-70">3.5 gallons of gas</span>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <span className="text-red-400 font-bold text-xl">📉</span>
-                    <span className="font-bold opacity-70"><span className="text-red-400">88% of purchasing power GONE</span></span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="bg-accent/10 border border-accent/20 rounded-2xl p-8 text-center">
-              <p className="text-xl md:text-2xl font-black uppercase tracking-tighter italic mb-4">Meanwhile, $100 in <span className="text-accent">physical gold</span> in 1970 is worth <span className="text-accent">over $6,800</span> today.</p>
-              <p className="text-text-secondary max-w-2xl mx-auto mb-6">The math is not complicated. The system is designed to drain you. The only question is: <span className="text-accent font-bold">are you going to build your own fortress?</span></p>
-              <a href="#club" className="inline-block bg-accent text-background px-8 py-4 rounded-full font-black uppercase tracking-wider text-sm hover:scale-105 transition-all shadow-lg shadow-accent/20">Join the Stack Squad &mdash; $24.99/mo Starts Your Fortress</a>
-            </div>
-          </div>
-        </section>
         <div id="club" className="scroll-mt-0"><StackingClub spotPrices={spotPrices} addToCart={addToCart} /></div>
         <div id="shop" className="scroll-mt-8"><BullionShop spotPrices={spotPrices} addToCart={addToCart} /></div>
         <div id="swag" className="scroll-mt-4"><SwagShop addToCart={addToCart} /></div>
